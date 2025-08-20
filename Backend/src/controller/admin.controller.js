@@ -83,3 +83,55 @@ export const deleteSong = async (req, res, next) => {
         next(error);
     }
 }
+
+export const createAlbum = async (req, res, next) => {
+    try {
+        const { title, artist, releaseYear } = req.body;
+        const { imageFile } = req.files;
+
+        const imageURL = await uploadToCloudinary(imageFile); 
+        if (!imageURL) {
+            return res.status(400).json({ message: "Bad Request: Image upload failed" });
+        }
+
+        const album = new Album({ 
+            title, 
+            artist, 
+            releaseYear, 
+            imageURL 
+        });
+
+        await album.save();
+
+        res.status(201).json({ message: "Album created successfully", album });
+    } catch (error) {
+        console.log("Error creating album:", error);
+        next(error);
+    }
+}
+
+export const deleteAlbum = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+
+        // Find the album by ID
+        const album = await Album.findById(id);
+        if (!album) {
+            return res.status(404).json({ message: "Album not found" });
+        }       
+        // Delete the album's image from Cloudinary
+        const publicId = album.imageURL.split("/").pop().split(".")[0];
+        await cloudinary.uploader.destroy(publicId, { resource_type: "image" });
+        
+        // Remove the album from the database
+        await Album.findByIdAndDelete(id); 
+
+        // Remove the album's songs from the database
+        await Song.deleteMany({ albumId: id });
+
+        res.status(200).json({ message: "Album deleted successfully" });
+    } catch (error) {
+        console.log("Error deleting album:", error);
+        next(error);
+    }
+}
