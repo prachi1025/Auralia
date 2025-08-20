@@ -12,6 +12,8 @@ import adminRoutes from "./routes/admin.route.js"
 import songRoutes from "./routes/song.route.js"
 import albumRoutes from "./routes/album.route.js"
 import statRoutes from "./routes/stat.route.js"
+import { error } from "console"
+import e from "express"
 
 dotenv.config()
 
@@ -40,6 +42,10 @@ app.use("/api/songs", songRoutes)
 app.use("/api/albums", albumRoutes)
 //Backend Stats Routes
 app.use("/api/stats", statRoutes)
+
+app.use((error, req, res, next) => {
+    res.status(500).json({ message: process.env.NODE_ENV === "development" ? error.message : "Internal Server Error" });
+});
 
 app.listen(PORT, () => {
     console.log(`server live on ${PORT}`)
