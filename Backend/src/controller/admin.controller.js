@@ -15,6 +15,10 @@ const uploadToCloudinary = async (file) => {
     }
 }
 
+export const checkAdmin = (req, res) => {
+    res.status(200).json({ message: "Admin check successful" });        
+}
+
 export const createSong = async (req, res, next) => {
     try {
         if (!req.files || !req.files.audioFile || !req.files.imageFile) {
@@ -122,7 +126,7 @@ export const deleteAlbum = async (req, res, next) => {
         // Delete the album's image from Cloudinary
         const publicId = album.imageURL.split("/").pop().split(".")[0];
         await cloudinary.uploader.destroy(publicId, { resource_type: "image" });
-        
+
         // Remove the album from the database
         await Album.findByIdAndDelete(id); 
 
