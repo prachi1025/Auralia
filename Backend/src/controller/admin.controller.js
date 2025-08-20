@@ -15,7 +15,7 @@ const uploadToCloudinary = async (file) => {
     }
 }
 
-export const createSong = async (req, res) => {
+export const createSong = async (req, res, next) => {
     try {
         if (!req.files || !req.files.audioFile || !req.files.imageFile) {
             return res.status(400).json({ message: "Bad Request: Missing audio or image file" });
@@ -49,6 +49,37 @@ export const createSong = async (req, res) => {
         res.status(201).json({ message: "Song created successfully", song });
     } catch (error) {
         console.log("Error creating song:", error);
+        next(error);
+    }
+}
+
+export const deleteSong = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+
+        // Find the song by ID
+        const song = await Song.findById(id);
+        if (!song) {
+            return res.status(404).json({ message: "Song not found" });
+        }
+
+        // Delete the song from Cloudinary
+        const publicId = song.audioURL.split("/").pop().split(".")[0];
+        await cloudinary.uploader.destroy(publicId, { resource_type: "video" });
+
+        // Remove the song from the database
+        await Song.findByIdAndDelete(id);
+
+        // If the song is associated with an album, remove it from the album's songs array
+        if (song.albumId) {
+            await Album.findByIdAndUpdate(song.albumId, {
+                $pull: { songs: song._id }
+            });
+        }
+
+        res.status(200).json({ message: "Song deleted successfully" });
+    } catch (error) {
+        console.log("Error deleting song:", error);
         next(error);
     }
 }
