@@ -52,3 +52,5 @@ app.listen(PORT, () => {
     console.log("http://localhost:5000/")
     connectDB()
 })
+
+//todo: socket.io integration
