@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@clerk/clerk-react';
 import { axiosInstance } from '@/lib/axios';
+import Loader from '@/components/Loader';
 
 
 const updateApiToken = (token: string | null) => {
@@ -35,19 +36,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     if (loading) {
         return <div className='min-h-screen w-full flex justify-center items-center'>
-            <div
-                className="h-14 w-14 
-                rounded-full 
-                border-4 border-transparent 
-                animate-spin
-                bg-gradient-to-tr from-pink-500 via-purple-500 to-sky-500
-                p-[2px]
-                "
-            >
-                {/* Transparent center with dark background inside */}
-                <div className="h-full w-full rounded-full bg-background" />
-            </div>
-        </div>; 
+            <Loader />
+         </div>; 
     }
 
     return <div> {children} </div>

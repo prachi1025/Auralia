@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import { clerkMiddleware } from "@clerk/express"
 import fileUpload from "express-fileupload"
 import path from "path"
+import cors from "cors"
 
 import { connectDB } from "./lib/db.js"
 
@@ -12,14 +13,19 @@ import adminRoutes from "./routes/admin.route.js"
 import songRoutes from "./routes/song.route.js"
 import albumRoutes from "./routes/album.route.js"
 import statRoutes from "./routes/stat.route.js"
-import { error } from "console"
-import e from "express"
 
 dotenv.config()
 
 const __dirname = path.resolve()
 const app = express()
 const PORT = 5000 || process.env.PORT
+
+app.use(cors(
+    {
+        origin: "http://localhost:3000",
+        credentials: true,
+    }
+)) // to allow cross-origin requests (frontend to backend)
 
 app.use(express.json()) // to parse req.body
 app.use(clerkMiddleware()) // Middleware for Clerk authentication (this will add auth to req object)
