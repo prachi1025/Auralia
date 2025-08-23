@@ -18,7 +18,7 @@ const MainLayout = () => {
           maxSize={20}
           onResize={(size) => {
             
-            setIsCompact(size <= 8);
+            setIsCompact(size <= 9);
           }}
         >
           <LeftSidebar isCompact={isCompact} />
