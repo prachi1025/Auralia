@@ -13,12 +13,12 @@ const MainLayout = () => {
         
         {/* left sidebar */}
         <ResizablePanel 
-          defaultSize={20} 
-          minSize={isMobile ? 0 : 12} 
-          maxSize={30}
+          defaultSize={15} 
+          minSize={isMobile ? 0 : 6} 
+          maxSize={20}
           onResize={(size) => {
-            // 👇 agar sidebar size ≤ 20% hai toh compact mode on
-            setIsCompact(size <= 20);
+            
+            setIsCompact(size <= 8);
           }}
         >
           <LeftSidebar isCompact={isCompact} />

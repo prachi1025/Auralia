@@ -23,9 +23,9 @@ const LeftSidebar = ({ isCompact }: { isCompact: boolean }) => {
           <Link
             to={"/"}
             className={cn(
-              "relative flex items-center justify-start gap-2 px-3 py-2 rounded-lg",
+              "relative flex items-center justify-start gap-2 px-3 py-2 rounded-lg cursor-pointer",
               "font-semibold text-slate-200 text-sm transition-all duration-300",
-              "hover:bg-white/10 hover:shadow-[0_0_12px_rgba(139,92,246,0.5)]"
+              "hover:bg-white/5 hover:scale-[1.02] hover:shadow-[0_0_10px_rgba(255,255,255,0.08)]"
             )}
           >
             <HomeIcon className="size-5 text-slate-200" />
@@ -37,9 +37,9 @@ const LeftSidebar = ({ isCompact }: { isCompact: boolean }) => {
             <Link
               to={"/chat"}
               className={cn(
-                "relative flex items-center justify-start gap-2 px-3 py-2 rounded-lg",
+                "relative flex items-center justify-start gap-2 px-3 py-2 rounded-lg cursor-pointer",
                 "font-semibold text-slate-200 text-sm transition-all duration-300",
-                "hover:bg-white/10 hover:shadow-[0_0_12px_rgba(139,92,246,0.5)]"
+                "hover:bg-white/5 hover:scale-[1.02] hover:shadow-[0_0_10px_rgba(255,255,255,0.08)]"
               )}
             >
               <MessageCircle className="size-5 text-slate-200" />
@@ -53,8 +53,8 @@ const LeftSidebar = ({ isCompact }: { isCompact: boolean }) => {
       <div className="flex-1 rounded-xl p-4 bg-gradient-to-b from-[#0f172a]/80 via-[#1e1b4b]/80 to-[#0f172a]/80 shadow-lg">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center px-2">
-            <Library className="size-5 mr-2" />
-            {!isCompact && <span>Albums</span>}
+            <Library className="size-5 mr-2 text-slate-200" />
+            {!isCompact && <span className="text-slate-200 font-medium">Albums</span>}
           </div>
         </div>
 
@@ -68,8 +68,9 @@ const LeftSidebar = ({ isCompact }: { isCompact: boolean }) => {
                   to={`/albums/${album._id}`}
                   key={album._id}
                   className={cn(
-                    "flex items-center gap-3 p-2 rounded-lg transition-all duration-300",
-                    "text-slate-200 text-sm hover:bg-white/10 hover:shadow-[0_0_12px_rgba(139,92,246,0.5)]"
+                    "flex items-center gap-3 p-2 rounded-lg cursor-pointer transition-all duration-300",
+                    "text-slate-200 text-sm",
+                    "hover:bg-white/5 hover:scale-[1.02] hover:shadow-[0_0_10px_rgba(255,255,255,0.08)]"
                   )}
                 >
                   <img
