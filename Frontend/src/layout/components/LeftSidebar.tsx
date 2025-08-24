@@ -15,9 +15,9 @@ const LeftSidebar = ({ isCompact }: { isCompact: boolean }) => {
   }, [fetchAlbums]);
 
   return (
-    <div className="h-full flex flex-col gap-2">
+    <div className="h-full flex flex-col gap-1">
       {/* Navigation menu */}
-      <div className="rounded-xl bg-gradient-to-b from-[#0f172a]/80 via-[#1e1b4b]/80 to-[#0f172a]/80 p-3 shadow-lg">
+      <div className="rounded-md bg-gradient-to-b from-[#0f172a]/80 via-[#1e1b4b]/80 to-[#0f172a]/80 p-3 shadow-lg">
         <div className="space-y-1">
           {/* Home Button */}
           <Link
@@ -28,7 +28,7 @@ const LeftSidebar = ({ isCompact }: { isCompact: boolean }) => {
               "hover:bg-white/5 hover:scale-[1.02] hover:shadow-[0_0_10px_rgba(255,255,255,0.08)]"
             )}
           >
-            <HomeIcon className="size-5 text-slate-200" />
+            <HomeIcon className="size-5 text-slate-200 shrink-0" />
             {!isCompact && <span>Home</span>}
           </Link>
 
@@ -42,7 +42,7 @@ const LeftSidebar = ({ isCompact }: { isCompact: boolean }) => {
                 "hover:bg-white/5 hover:scale-[1.02] hover:shadow-[0_0_10px_rgba(255,255,255,0.08)]"
               )}
             >
-              <MessageCircle className="size-5 text-slate-200" />
+              <MessageCircle className="size-5 text-slate-200 shrink-0" />
               {!isCompact && <span>Messages</span>}
             </Link>
           </SignedIn>
@@ -50,10 +50,10 @@ const LeftSidebar = ({ isCompact }: { isCompact: boolean }) => {
       </div>
 
       {/* Albums Section */}
-      <div className="flex-1 rounded-xl p-4 bg-gradient-to-b from-[#0f172a]/80 via-[#1e1b4b]/80 to-[#0f172a]/80 shadow-lg">
+      <div className="flex-1 rounded-md p-4 bg-gradient-to-b from-[#0f172a]/80 via-[#1e1b4b]/80 to-[#0f172a]/80 shadow-lg">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center px-2">
-            <Library className="size-5 mr-2 text-slate-200" />
+            <Library className="size-5 mr-2 text-slate-200 shrink-0" />
             {!isCompact && <span className="text-slate-200 font-medium">Albums</span>}
           </div>
         </div>
@@ -76,7 +76,7 @@ const LeftSidebar = ({ isCompact }: { isCompact: boolean }) => {
                   <img
                     src={album.imageUrl}
                     alt={album.title}
-                    className="w-10 h-10 rounded-md object-cover"
+                    className="w-10 h-10 rounded-md object-cover shrink-0"
                   />
                   {!isCompact && (
                     <div className="flex flex-col">

@@ -29,7 +29,7 @@ const AlbumPage = () => {
     <>
         {isLoading && <AlbumPageSkeleton />}
         <div className="h-full">
-            <ScrollArea>
+            <ScrollArea className="rounded-md">
                 {/* Main Content */}
                 <div className="relative min-h-full">
                     

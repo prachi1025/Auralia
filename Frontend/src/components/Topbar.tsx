@@ -9,7 +9,7 @@ import AuraliaLogo from "../assets/Auralia-Logo.png"
 const Topbar = () => {
     const isAdmin = false
   return (
-    <div className="flex items-center justify-between p-2 sticky top-0 bg-gradient-to-r from-[#0f172a] via-[#1e1b4b] to-[#0f172a] border-b border-white/10 backdrop:blur-md">
+    <div className="flex items-center justify-between p-2 sticky top-0 bg-gradient-to-r from-[#0f172a] via-[#1e1b4b] to-[#0f172a] border-b border-white/10 backdrop:blur-md rounded-md">
         <div className="flex gap-2 items-center">
             <img src= {AuraliaLogo} alt="Auralia Logo" className="h-10 w-auto object-contain"/> 
 
