@@ -16,6 +16,7 @@ export const requireAdmin = async (req, res, next) => {
         if (!isAdmin) {
             return res.status(403).json({ message: "Forbidden: you do not have admin access" });
         }
+        next()
     } catch (error) {
         console.error("Error checking admin status:", error);
         next(error);

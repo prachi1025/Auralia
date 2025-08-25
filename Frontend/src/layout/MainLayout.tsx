@@ -28,7 +28,7 @@ const MainLayout = () => {
         <ResizableHandle className="w-1 bg-transparent rounded-lg transition-colors" />
 
         {/* main content */}
-        <ResizablePanel defaultSize={isMobile? 80 : 60}>
+        <ResizablePanel defaultSize={isMobile? 80 : 65}>
           <Outlet />
         </ResizablePanel>
 
