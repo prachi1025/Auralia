@@ -5,9 +5,11 @@ import SignInAuthButtons from "./SignInAuthButtons.tsx"
 import { Button } from "./ui/button.tsx"
 
 import AuraliaLogo from "../assets/Auralia-Logo.png"
+import { useAuthStore } from "@/stores/useAuthStore.ts"
 
 const Topbar = () => {
-    const isAdmin = false
+    const {isAdmin} = useAuthStore();
+    console.log(isAdmin);
   return (
     <div className="flex items-center justify-between p-2 sticky top-0 bg-gradient-to-r from-[#0f172a] via-[#1e1b4b] to-[#0f172a] border-b border-white/10 backdrop:blur-md rounded-md">
         <div className="flex gap-2 items-center">
