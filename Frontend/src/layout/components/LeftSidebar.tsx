@@ -25,7 +25,7 @@ const LeftSidebar = ({ isCompact }: { isCompact: boolean }) => {
             className={cn(
               "relative flex items-center justify-start gap-2 px-3 py-2 rounded-lg cursor-pointer",
               "font-semibold text-slate-200 text-sm transition-all duration-300",
-              "hover:bg-white/5 hover:scale-[1.02] hover:shadow-[0_0_10px_rgba(255,255,255,0.08)]"
+              "hover:bg-white/5 "
             )}
           >
             <HomeIcon className="size-5 text-slate-200 shrink-0" />
@@ -39,7 +39,7 @@ const LeftSidebar = ({ isCompact }: { isCompact: boolean }) => {
               className={cn(
                 "relative flex items-center justify-start gap-2 px-3 py-2 rounded-lg cursor-pointer",
                 "font-semibold text-slate-200 text-sm transition-all duration-300",
-                "hover:bg-white/5 hover:scale-[1.02] hover:shadow-[0_0_10px_rgba(255,255,255,0.08)]"
+                "hover:bg-white/5 "
               )}
             >
               <MessageCircle className="size-5 text-slate-200 shrink-0" />
@@ -70,7 +70,7 @@ const LeftSidebar = ({ isCompact }: { isCompact: boolean }) => {
                   className={cn(
                     "flex items-center gap-3 p-2 rounded-lg cursor-pointer transition-all duration-300",
                     "text-slate-200 text-sm",
-                    "hover:bg-white/5 hover:scale-[1.02] hover:shadow-[0_0_10px_rgba(255,255,255,0.08)]"
+                    "hover:bg-white/5 "
                   )}
                 >
                   <img
