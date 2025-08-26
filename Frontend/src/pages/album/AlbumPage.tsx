@@ -2,6 +2,7 @@ import AlbumPageSkeleton from "@/components/skeletons/AlbumPageSkeleton"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { useMusicStore } from "@/stores/useMusicStore"
+import { usePlayerStore } from "@/stores/usePlayerStore"
 import { Clock, Play } from "lucide-react"
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
@@ -15,6 +16,7 @@ const formatDuration = (durationInSeconds: number) => {
 const AlbumPage = () => {
     const { albumId } = useParams()
     const { fetchAlbumById, isLoading, currentAlbum} = useMusicStore()
+    const { currentSong, isPlaying, playAlbum, togglePlay} = usePlayerStore()
 
     useEffect(() => {
     if (albumId) {
@@ -22,9 +24,23 @@ const AlbumPage = () => {
     }
     }, [fetchAlbumById, albumId])
 
-    // if (isLoading) {
-    //     return <AlbumPageSkeleton />
-    // }
+	const handlePlayAlbum = () => {
+		if (!currentAlbum) return;
+
+		const isCurrentAlbumPlaying = currentAlbum?.songs.some((song) => song._id === currentSong?._id);
+		if (isCurrentAlbumPlaying) togglePlay();
+		else {
+			// start playing the album from the beginning
+			playAlbum(currentAlbum?.songs, 0);
+		}
+	};
+
+	const handlePlaySong = (index: number) => {
+		if (!currentAlbum) return;
+
+		playAlbum(currentAlbum?.songs, index);
+	};
+    
   return (
     <>
         {isLoading && <AlbumPageSkeleton />}
@@ -60,6 +76,7 @@ const AlbumPage = () => {
                         {/* Play Button */}
                         <div className="px-6">
                             <Button 
+                                onClick={handlePlayAlbum}
                                 size={'icon'}
                                 className="group relative w-16 h-16 rounded-full bg-gradient-to-tr from-pink-500 via-purple-500 to-sky-500 text-white shadow-[0_0_15px_rgba(168,85,247,0.6)] transition-all duration-300 hover:scale-110 active:scale-95 hover:shadow-[0_0_25px_rgba(168,85,247,0.9)]">
                                 <Play className="w-7 h-7 ml-1 relative z-10 fill-white" />
@@ -80,14 +97,25 @@ const AlbumPage = () => {
                             {/* table body */}
                             <div className="px-4">
                                 <div className="space-y-2 py-4">
-                                    {currentAlbum?.songs.map((song, index) => (
+                                    {currentAlbum?.songs.map((song, index) => {
+                                        const isCurrentSong = currentSong?._id === song._id;
+                                        return (
                                         <div 
+                                            onClick={() => handlePlaySong(index)}
                                             key={song._id} 
                                             className='grid grid-cols-[16px_4fr_2fr_1fr] gap-4 px-4 py-2 text-sm  text-zinc-300 hover:bg-white/5 rounded-md group cursor-pointer'
                                         >
-                                            <div className="flex items-center justify-start">
-                                                <span className="w-4 text-right group-hover:hidden">{index + 1}</span>
-                                                <Play className="h-4 w-4 hidden group-hover:block" />
+                                            <div className="flex items-center justify-center">
+                                                {isCurrentSong && isPlaying ? (
+														<div className='size-4 text-pink-500'>♫</div>
+													) : (
+														<span className='group-hover:hidden'>{index + 1}</span>
+												    )
+                                                }
+                                                {!isCurrentSong && (
+														<Play className='h-4 w-4 hidden group-hover:block' />
+													)
+                                                }
                                             </div>
 
                                             <div className="flex items-center gap-3">
@@ -107,7 +135,8 @@ const AlbumPage = () => {
                                                 {formatDuration(song.duration)}
                                             </div>
                                         </div>
-                                    ))}
+                                        ) 
+                                    })}
                                 </div>
                             </div>
                         </div>
