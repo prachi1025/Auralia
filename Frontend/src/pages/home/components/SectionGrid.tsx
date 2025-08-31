@@ -1,6 +1,7 @@
 import type { Song } from "@/types";
 import SectionGridSkeleton from "../../../components/skeletons/SectionGridSkeleton.tsx";
 import { Button } from "@/components/ui/button";
+import PlayButton from "./PlayButton.tsx";
 
 type SectionGridProps = {
   title: string;
@@ -40,8 +41,10 @@ const SectionGrid = ({ songs, title, isLoading }: SectionGridProps) => {
                 className="w-full aspect-square object-cover 
                 rounded-t-md transition-transform duration-300 group-hover:scale-105"
               />
+              <div className="absolute bottom-3 right-1">
+                <PlayButton song={song} />
+              </div>
             </div>
-
             <div className="px-3 pb-3">
               <h3 className="font-medium text-slate-100 truncate group-hover:text-sky-300 transition-colors">
                 {song.title}
@@ -51,7 +54,7 @@ const SectionGrid = ({ songs, title, isLoading }: SectionGridProps) => {
               </p>
             </div>
           </div>
-        ))}
+        ))}   
       </div>
     </div>
   );

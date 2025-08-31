@@ -31,14 +31,14 @@ const MainLayout = () => {
         <ResizableHandle className="w-1 bg-transparent rounded-lg transition-colors" />
 
         {/* main content */}
-        <ResizablePanel defaultSize={isMobile? 80 : 65}>
+        <ResizablePanel defaultSize={isMobile? 80 : 69}>
           <Outlet />
         </ResizablePanel>
 
         <ResizableHandle className="w-1 bg-transparent rounded-lg transition-colors" />
       
         {/* right sidebar */}
-        <ResizablePanel defaultSize={20} minSize={0} maxSize={25} collapsedSize={0}>
+        <ResizablePanel defaultSize={16} minSize={0} maxSize={20} collapsedSize={0}>
           <FriendsActivityPanel /> 
         </ResizablePanel>
       </ResizablePanelGroup>
