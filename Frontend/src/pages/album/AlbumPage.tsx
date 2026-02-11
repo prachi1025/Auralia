@@ -44,7 +44,7 @@ const AlbumPage = () => {
   return (
     <>
         {isLoading && <AlbumPageSkeleton />}
-        <div className="h-full">
+        <div className="h-full flex flex-col">
             <ScrollArea className="rounded-md">
                 {/* Main Content */}
                 <div className="relative min-h-full">
